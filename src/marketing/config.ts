@@ -5,7 +5,7 @@
  * When an env var is missing the site falls back to a safe placeholder and
  * never invents contact details, legal URLs or pricing.
  *
- *   NEXT_PUBLIC_SIGNUP_URL     Where "Start Creating Courses" goes. Defaults to the course studio.
+ *   NEXT_PUBLIC_SIGNUP_URL     Course signup destination. Without it, visitors can request a demo.
  *   NEXT_PUBLIC_CONTACT_EMAIL  Official contact email shown in the contact section.
  *   NEXT_PUBLIC_SITE_URL       Canonical site URL used for SEO metadata.
  *   CONTACT_WEBHOOK_URL        Server-only. Receives contact form submissions (see src/app/api/contact).
@@ -22,9 +22,9 @@ export const siteConfig = {
 } as const;
 
 export const navItems = [
+  { label: 'Home', href: '#platform' },
   { label: 'Features', href: '#features' },
   { label: 'How It Works', href: '#how-it-works' },
-  { label: 'Who It’s For', href: '#audience' },
   { label: 'Contact', href: '#contact' },
 ] as const;
 
@@ -99,7 +99,9 @@ export const faqItems = [
   },
   {
     q: 'How can I get started?',
-    a: 'Click "Start Creating Courses", create your first course with a title and description, add your YouTube Unlisted video links as lessons, set your price, and publish when you are ready.',
+    a: siteConfig.signupHref === '#contact'
+      ? 'Request a demo using the enquiry form. The team can walk you through creating a course and publishing it to your learner portal.'
+      : 'Choose “Create a course” to get started. Add a title, a description and your lesson links, then set access and publish when you are ready.',
   },
 ] as const;
 

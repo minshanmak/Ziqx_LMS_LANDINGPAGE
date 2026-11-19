@@ -1,86 +1,93 @@
-import Link from 'next/link';
 import {
-  ArrowRight, Video, Layers, Wallet, Users, PlayCircle, Award, Radio, Link2, Clock, MonitorPlay, CheckCircle2, Quote,
+  ArrowDown, ArrowRight, Award, BookOpen, Building2, ChevronDown, CirclePlay, GraduationCap,
+  Layers, Link2, ListVideo, MonitorPlay, Radio, School, Users, Wallet,
 } from 'lucide-react';
-import { siteConfig, testimonials, audiences, faqItems, videoPrivacyNote } from '@/marketing/config';
-import { TeacherDashboardMock, CourseBuilderMock, StudentPortalMock } from './mockups';
+import { audiences, faqItems, siteConfig, testimonials, videoPrivacyNote } from '@/marketing/config';
+import { CourseBuilderMock, StudentPortalMock, TeacherDashboardMock } from './mockups';
 import styles from './marketing.module.css';
 
-const ICON = { size: 20, strokeWidth: 1.75 } as const;
-
-/* ---------- 02 Hero ---------- */
 export function Hero() {
   return (
-    <section id="platform" className={`${styles.section} ${styles.hero} ${styles.heroBackdrop}`} aria-labelledby="hero-title">
-      <div className={styles.container}>
-        <div className={styles.heroGrid}>
-          <div data-reveal>
-            <p className={styles.eyebrow}>Built for teachers and course creators</p>
-            <h1 id="hero-title" className={styles.h1}>
-              Turn Your Existing Videos Into Online Courses.
-            </h1>
-            <p className={styles.lead}>
-              Turn your existing YouTube Unlisted videos into structured courses. Organize lessons, offer free or paid access, and manage your learners from one platform.
-            </p>
-            <div className={styles.btnRow}>
-              <a href={siteConfig.signupHref} className={`${styles.btn} ${styles.btnPrimary}`}>
-                Start Creating Courses <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
-              </a>
-              <a href="#how-it-works" className={`${styles.btn} ${styles.btnSecondary}`}>
-                See How It Works
-              </a>
-            </div>
-            <p className={styles.tagline}>{siteConfig.tagline}</p>
-            <p className={styles.heroNote}>
-              Lessons link to your existing YouTube Unlisted videos. You do not need to upload them again.
-            </p>
-          </div>
-          <div data-reveal="mockup">
-            <TeacherDashboardMock />
+    <section id="platform" className={styles.hero} aria-labelledby="hero-title">
+      <div className={`${styles.container} ${styles.heroGrid}`}>
+        <div className={styles.heroCopy}>
+          <p className={styles.heroLabel}><GraduationCap size={18} aria-hidden="true" /> LMS for educators</p>
+          <h1 id="hero-title">Your videos.<br /><span>Your courses.</span></h1>
+          <p className={styles.heroLead}>Turn your unlisted YouTube videos into structured courses. Set your price, teach live, and follow each learner’s progress in one place.</p>
+          <div className={styles.actions}>
+            <a href={siteConfig.signupHref} className={styles.primary}>
+              {siteConfig.signupHref === '#contact' ? 'Request a demo' : 'Create a course'}
+              <ArrowRight size={17} aria-hidden="true" />
+            </a>
+            <a href="#how-it-works" className={styles.secondary}>See how it works <ArrowDown size={16} aria-hidden="true" /></a>
           </div>
         </div>
+        <figure className={styles.heroStage}>
+          <figcaption className={styles.stageCaption}>
+            <span><MonitorPlay size={16} aria-hidden="true" /> Trainer workspace</span>
+            <small>Sample data</small>
+          </figcaption>
+          <div className={styles.heroScreen}><TeacherDashboardMock /></div>
+        </figure>
       </div>
     </section>
   );
 }
 
-/* ---------- 03 Problem and solution ---------- */
-const problems = [
-  { icon: Video, text: 'Video content is scattered across YouTube.' },
-  { icon: Users, text: 'Managing students manually becomes difficult.' },
-  { icon: Wallet, text: 'Selling recorded courses requires a website and multiple tools.' },
-  { icon: Clock, text: 'Tracking student progress is complicated.' },
-  { icon: Layers, text: 'Creating a professional learning experience takes time.' },
+const audienceIcons = [GraduationCap, MonitorPlay, CirclePlay, Users, School, Building2];
+
+export function AudienceSection() {
+  return (
+    <section id="audience" className={styles.audience} aria-labelledby="audience-title">
+      <div className={`${styles.container} ${styles.audienceInner}`}>
+        <h2 id="audience-title">Designed for</h2>
+        <ul>
+          {audiences.map(({ title }, i) => {
+            const Icon = audienceIcons[i];
+            return <li key={title}><Icon size={18} aria-hidden="true" />{title}</li>;
+          })}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
+const features = [
+  { icon: Wallet, title: 'Free and paid courses', summary: 'Choose who can join and what they pay.', points: ['Offer free enrolment or set a course price.', 'Add an optional discount and preview the price learners will see.'] },
+  { icon: Users, title: 'Learner management', summary: 'See who’s enrolled and how far they’ve come.', points: ['Find learners across your courses.', 'Review enrolments and individual course progress.'] },
+  { icon: BookOpen, title: 'Learner portal', summary: 'Give your students a home for their courses.', points: ['Learners can browse courses and resume their last lesson.', 'Each course shows its modules, lessons and completion progress.'] },
+  { icon: Radio, title: 'Live sessions', summary: 'Bring your class together between lessons.', points: ['Schedule a session and add a Google Meet link.', 'Learners can find upcoming sessions from their portal.'] },
+  { icon: Award, title: 'Completion certificates', summary: 'Recognise learners when they finish a course.', points: ['Learners can open and download their certificate.', 'A shareable certificate link makes their achievement easy to pass on.'] },
 ];
 
-export function ProblemSolution() {
+export function Features() {
   return (
-    <section id="for-teachers" className={styles.section} aria-labelledby="problem-title">
+    <section id="features" className={styles.section} aria-labelledby="features-title">
       <div className={styles.container}>
-        <div className={styles.twoCol}>
-          <div data-reveal>
-            <p className={styles.eyebrow}>Product introduction</p>
-            <h2 id="problem-title" className={styles.h2}>Your Teaching Deserves More Than a Video Playlist.</h2>
-            <ul className={styles.problemList} style={{ marginTop: 32 }}>
-              {problems.map(({ icon: Icon, text }) => (
-                <li key={text}>
-                  <span className={styles.problemIcon} aria-hidden="true"><Icon size={18} strokeWidth={1.75} /></span>
-                  <span>{text}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className={styles.solutionPanel} data-reveal="mockup">
-            <p className={styles.eyebrow} style={{ color: '#3B40B8' }}>What ZIQX Skills does</p>
-            <p style={{ margin: 0, fontSize: 18, lineHeight: '26px', fontWeight: 700, color: '#14151A' }}>
-              One workflow from video link to published course.
-            </p>
-            <div className={styles.flow} style={{ marginTop: 20 }}>
-              <FlowStep icon={<Link2 size={16} strokeWidth={1.75} />} text="Paste your YouTube Unlisted links into lessons" />
-              <FlowStep icon={<Layers size={16} strokeWidth={1.75} />} text="Organize them into modules and lessons" />
-              <FlowStep icon={<Wallet size={16} strokeWidth={1.75} />} text="Set a free or paid price" />
-              <FlowStep icon={<Users size={16} strokeWidth={1.75} />} text="Track enrolments, progress and live sessions" />
+        <header className={styles.sectionHead}>
+          <p className={styles.kicker}>Platform features</p>
+          <h2 id="features-title">Inside your teaching workspace.</h2>
+        </header>
+        <div className={styles.featureLayout}>
+          <article className={styles.builderCard} id="for-teachers">
+            <div className={styles.builderCopy}>
+              <span className={styles.featureBadge}><Layers size={18} aria-hidden="true" /></span>
+              <h3>Course builder</h3>
+              <p>Arrange videos into modules and lessons, then preview the course as a learner.</p>
             </div>
+            <div className={styles.builderScreen}><CourseBuilderMock /></div>
+          </article>
+          <div className={styles.disclosures}>
+            {features.map(({ icon: Icon, title, summary, points }, index) => (
+              <details key={title} className={styles.disclosure} id={index === 0 ? 'monetization' : undefined}>
+                <summary>
+                  <span className={styles.featureBadge}><Icon size={20} aria-hidden="true" /></span>
+                  <span className={styles.rowCopy}><strong>{title}</strong><span>{summary}</span></span>
+                  <ChevronDown size={18} aria-hidden="true" className={styles.chevron} />
+                </summary>
+                <ul>{points.map((point) => <li key={point}>{point}</li>)}</ul>
+              </details>
+            ))}
           </div>
         </div>
       </div>
@@ -88,37 +95,26 @@ export function ProblemSolution() {
   );
 }
 
-function FlowStep({ icon, text }: { icon: React.ReactNode; text: string }) {
-  return (
-    <div className={styles.flowStep}>
-      <span className={styles.flowStepIcon} aria-hidden="true">{icon}</span>
-      <span>{text}</span>
-    </div>
-  );
-}
-
-/* ---------- 04 How it works ---------- */
 const steps = [
-  { n: '01', title: 'Connect Your YouTube Videos', text: 'Add links to your existing YouTube Unlisted videos as lessons.' },
-  { n: '02', title: 'Organize Your Course Structure', text: 'Group your lessons into modules and chapters in minutes.' },
-  { n: '03', title: 'Set Pricing and Details', text: 'Choose free access or set a price, add a description and course thumbnail.' },
-  { n: '04', title: 'Publish and Start Enrolling', text: 'Make your course available through your learner portal.' },
+  { icon: Link2, title: 'Link your lessons', text: 'Paste your existing unlisted YouTube links into the course builder.' },
+  { icon: ListVideo, title: 'Shape the course', text: 'Group lessons into modules and choose free or paid access.' },
+  { icon: GraduationCap, title: 'Open enrolment', text: 'Publish to your learner portal and invite your first students.' },
 ];
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className={styles.section} aria-labelledby="how-title">
+    <section id="how-it-works" className={`${styles.section} ${styles.workflow}`} aria-labelledby="how-title">
       <div className={styles.container}>
-        <div className={`${styles.sectionHead} ${styles.center}`} data-reveal>
-          <p className={styles.eyebrow}>How it works</p>
-          <h2 id="how-title" className={styles.h2}>From Existing Videos to Published Courses.</h2>
-        </div>
-        <ol className={styles.steps} data-reveal-group>
-          {steps.map((s) => (
-            <li key={s.n} className={styles.step}>
-              <span className={styles.stepNumber}>{s.n}</span>
-              <h3 className={styles.stepTitle}>{s.title}</h3>
-              <p className={styles.stepText}>{s.text}</p>
+        <header className={styles.sectionHead}>
+          <p className={styles.kicker}>How it works</p>
+          <h2 id="how-title">From playlist to published course.</h2>
+        </header>
+        <ol className={styles.steps}>
+          {steps.map(({ icon: Icon, title, text }, index) => (
+            <li key={title}>
+              <div className={styles.stepTrack}><span><Icon size={22} aria-hidden="true" /></span></div>
+              <h3><small>{index + 1}.</small> {title}</h3>
+              <p>{text}</p>
             </li>
           ))}
         </ol>
@@ -127,355 +123,108 @@ export function HowItWorks() {
   );
 }
 
-/* ---------- 05 Feature showcase ---------- */
-const features = [
-  {
-    icon: Layers, tone: 'lavender', title: 'Simple Course Builder',
-    points: ['Create courses', 'Organize modules', 'Add individual lessons', 'Add YouTube video links'],
-  },
-  {
-    icon: Wallet, tone: 'sky', title: 'Course Monetization',
-    points: ['Create free courses', 'Create paid courses', 'Set course prices', 'Manage paid course access'],
-  },
-  {
-    icon: Users, tone: 'lime', title: 'Student Management',
-    points: ['View enrolled learners', 'Monitor course progress', 'Manage learner access'],
-  },
-  {
-    icon: PlayCircle, tone: 'lavender', title: 'Learning Experience',
-    points: ['Video lesson viewing', 'Course progress tracking', 'Quizzes', 'Course completion'],
-  },
-  {
-    icon: Radio, tone: 'sky', title: 'Live Learning',
-    points: ['Schedule live sessions', 'Google Meet session links', 'Upcoming and completed sessions'],
-  },
-  {
-    icon: Award, tone: 'lime', title: 'Certificates',
-    points: ['Course completion certificates', 'Download and sharing options'],
-  },
-] as const;
-
-export function Features() {
-  return (
-    <section id="features" className={`${styles.section} ${styles.sectionMuted}`} aria-labelledby="features-title">
-      <div className={styles.container}>
-        <div className={styles.sectionHead} data-reveal>
-          <p className={styles.eyebrow}>Features</p>
-          <h2 id="features-title" className={styles.h2}>The Tools to Create and Manage Your Courses.</h2>
-        </div>
-        <div className={styles.featureGrid} data-reveal-group>
-          {features.map(({ icon: Icon, tone, title, points }) => (
-            <article key={title} className={styles.feature}>
-              <span className={`${styles.featureIcon} ${styles[`tone${tone[0].toUpperCase()}${tone.slice(1)}` as 'toneLavender']}`} aria-hidden="true">
-                <Icon size={ICON.size} strokeWidth={ICON.strokeWidth} />
-              </span>
-              <h3 className={styles.featureTitle}>{title}</h3>
-              <ul className={styles.featureList}>
-                {points.map((p) => <li key={p}>{p}</li>)}
-              </ul>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- 06 Product showcase ---------- */
 export function ProductShowcase() {
   return (
-    <section id="product" className={`${styles.section} ${styles.sectionMuted}`} aria-labelledby="showcase-title">
-      <div className={styles.container}>
-        <div className={styles.sectionHead} data-reveal>
-          <p className={styles.eyebrow}>Product</p>
-          <h2 id="showcase-title" className={styles.h2}>Powerful for Teachers. Simple for Students.</h2>
+    <section id="product" className={styles.section} aria-labelledby="portal-title">
+      <div className={`${styles.container} ${styles.portalLayout}`}>
+        <div className={styles.portalCopy}>
+          <p className={styles.kicker}>The learner experience</p>
+          <h2 id="portal-title">A clear path to the next lesson.</h2>
+          <p className={styles.lead}>Students can pick up where they left off, see what’s coming up, and keep the certificates they’ve earned.</p>
+          <ul>
+            <li><CirclePlay size={19} /> Resume a lesson</li>
+            <li><Radio size={19} /> Join a live session</li>
+            <li><Award size={19} /> Download a certificate</li>
+          </ul>
         </div>
-
-        <div className={styles.showcaseBlock}>
-          <div className={styles.showcaseHead} data-reveal>
-            <div>
-              <h3 className={styles.h2} style={{ fontSize: 24, lineHeight: '32px' }}>Teacher dashboard</h3>
-              <p className={styles.lead} style={{ marginTop: 8 }}>
-                See published courses, learner numbers and revenue at a glance. Build courses from modules and lessons, and manage who is enrolled.
-              </p>
-            </div>
-            <ul className={styles.highlights} aria-label="Teacher dashboard highlights">
-              {['Course overview', 'Published courses', 'Total learners', 'Course revenue', 'Course performance', 'Course creation', 'Learner management'].map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
-          </div>
-          <div data-reveal="mockup">
-            <TeacherDashboardMock />
-          </div>
-          <div style={{ height: 24 }} />
-          <div data-reveal="mockup">
-            <CourseBuilderMock />
-          </div>
-        </div>
-
-        <div className={styles.showcaseBlock}>
-          <div className={styles.showcaseHead} data-reveal>
-            <div>
-              <h3 className={styles.h2} style={{ fontSize: 24, lineHeight: '32px' }}>Student learning portal</h3>
-              <p className={styles.lead} style={{ marginTop: 8 }}>
-                Learners find their courses, pick up their last lesson, follow their progress, and join live sessions from one place.
-              </p>
-            </div>
-            <ul className={styles.highlights} aria-label="Learner portal highlights">
-              {['My courses', 'Continue learning', 'Completion progress', 'Explore courses', 'Live sessions', 'Certificates'].map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
-          </div>
-          <div data-reveal="mockup">
-            <StudentPortalMock />
-          </div>
-        </div>
+        <figure className={styles.learnerStage}>
+          <figcaption className={styles.stageCaption}><span><BookOpen size={16} aria-hidden="true" /> Learner portal</span><small>Sample data</small></figcaption>
+          <StudentPortalMock />
+        </figure>
       </div>
     </section>
   );
 }
 
-/* ---------- Testimonials / social proof ---------- */
-const testimonialExamples = [
-  {
-    quote: 'I already have lessons recorded as YouTube Unlisted videos. ZIQX gives me a clear way to organize them into modules and present them as a structured course.',
-    name: 'Teacher name to be added',
-    role: 'Independent teacher · Sample profile',
-  },
-  {
-    quote: 'Keeping course content, enrolments and learner progress together makes running an online course feel much more organized.',
-    name: 'Teacher name to be added',
-    role: 'Online tutor · Sample profile',
-  },
-  {
-    quote: 'A dedicated learner portal gives my course a more professional home, with a clear place for students to find lessons and continue learning.',
-    name: 'Teacher name to be added',
-    role: 'Course creator · Sample profile',
-  },
-] as const;
-
 export function Testimonials() {
-  const hasApprovedTestimonials = testimonials.length > 0;
-  const items = hasApprovedTestimonials ? testimonials : testimonialExamples;
-
+  if (!testimonials.length) return null;
   return (
-    <section id="testimonials" className={styles.section} aria-labelledby="testimonials-title">
+    <section id="testimonials" className={`${styles.section} ${styles.stories}`} aria-labelledby="stories-title">
       <div className={styles.container}>
-        <div className={`${styles.sectionHead} ${styles.center}`} data-reveal>
-          <p className={styles.eyebrow}>{hasApprovedTestimonials ? 'Teacher stories' : 'Teacher stories · preview'}</p>
-          <h2 id="testimonials-title" className={styles.h2}>What Educators Say About ZIQX</h2>
-          <p className={styles.lead}>
-            A better way to bring your recorded lessons, courses and learners together.
-          </p>
-        </div>
-
-        <div className={styles.testimonialGrid} data-reveal-group>
-          {items.map((t, index) => (
-            <figure key={`${t.name}-${index}`} className={styles.testimonialCard}>
-              <div className={styles.testimonialTop}>
-                <span className={styles.testimonialQuoteIcon} aria-hidden="true">
-                  <Quote size={20} strokeWidth={1.75} />
-                </span>
-                {!hasApprovedTestimonials && <span className={styles.testimonialSample}>Sample copy</span>}
-              </div>
-              <blockquote className={styles.testimonialQuote}>
-                “{t.quote}”
-              </blockquote>
-              <figcaption className={styles.testimonialPerson}>
-                <span className={styles.testimonialAvatar} aria-hidden="true">
-                  {hasApprovedTestimonials ? t.name.trim().charAt(0).toUpperCase() : 'T'}
-                </span>
-                <span className={styles.testimonialIdentity}>
-                  <strong className={styles.testimonialName}>{t.name}</strong>
-                  <span className={styles.testimonialRole}>{t.role}</span>
-                </span>
-              </figcaption>
+        <header className={styles.sectionHead}><p className={styles.kicker}>Teacher stories</p><h2 id="stories-title">In educators’ own words.</h2></header>
+        <div className={styles.quotes}>
+          {testimonials.map(({ quote, name, role }) => (
+            <figure key={name}>
+              <blockquote>“{quote}”</blockquote>
+              <figcaption><strong>{name}</strong><span>{role}</span></figcaption>
             </figure>
           ))}
         </div>
-
-        {!hasApprovedTestimonials && (
-          <p className={styles.testimonialNotice}>
-            <strong>Content preview:</strong> These are illustrative examples, not real customer endorsements. Replace them with approved teacher feedback before publishing the website.
-          </p>
-        )}
       </div>
     </section>
   );
 }
 
-/* ---------- 07 Course monetization ---------- */
-export function Monetization() {
-  const flow = [
-    { icon: Video, label: 'YouTube videos' },
-    { icon: Layers, label: 'Organized lessons' },
-    { icon: MonitorPlay, label: 'Published course' },
-    { icon: Users, label: 'Student enrolments' },
-  ];
-  return (
-    <section id="monetization" className={styles.section} aria-labelledby="monet-title">
-      <div className={styles.container}>
-        <div className={styles.monetGrid}>
-          <div data-reveal>
-            <p className={styles.eyebrow}>Course monetization</p>
-            <h2 id="monet-title" className={styles.h2}>Offer Your Courses on Your Terms.</h2>
-            <p className={styles.lead}>
-              Turn recorded lessons into free or paid courses. Organize your videos into a course, choose free access or set a price,
-              then publish it to your learner portal.
-            </p>
-            <div className={styles.flow} style={{ marginTop: 32 }}>
-              {flow.map((f, i) => (
-                <div key={f.label}>
-                  <div className={styles.flowStep}>
-                    <span className={styles.flowStepIcon} aria-hidden="true"><f.icon size={16} strokeWidth={1.75} /></span>
-                    <span>{f.label}</span>
-                  </div>
-                  {i < flow.length - 1 && (
-                    <div className={styles.flowArrow} aria-hidden="true" style={{ height: 20, alignItems: 'center' }}>↓</div>
-                  )}
-                </div>
-              ))}
-            </div>
-            <div className={styles.noteBox} role="note">
-              <CheckCircle2 size={18} strokeWidth={1.75} aria-hidden="true" style={{ flexShrink: 0, marginTop: 2 }} />
-              <span>
-                ZIQX Skills does not promise specific earnings. Course results depend on your content, pricing and audience.
-              </span>
-            </div>
-          </div>
-
-            <div data-reveal="mockup">
-              <article className={`${styles.card} ${styles.demoCard}`} aria-label="Demonstration course card">
-                <div className={styles.demoCardArt} aria-hidden="true"><Layers size={40} strokeWidth={1.5} /></div>
-                <div className={styles.demoCardBody}>
-                  <h3 className={styles.demoCardTitle}>Data analysis</h3>
-                  <p className={styles.demoCardMeta}>Daniel Mensah · 6 modules · 40 lessons</p>
-                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
-                    <span className={styles.demoPrice}>$79.00</span>
-                    <span className={`${styles.badge} ${styles.badgePublished}`}>Published</span>
-                  </div>
-              </div>
-            </article>
-            <p className={styles.demoCaption}>
-              Demonstration course. The title, instructor and price are examples only and are not ZIQX Skills pricing.
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Who ZIQX Skills is for ---------- */
-export function AudienceSection() {
-  return (
-    <section id="audience" className={`${styles.section} ${styles.sectionMuted}`} aria-labelledby="audience-title">
-      <div className={styles.container}>
-        <div className={styles.sectionHead} data-reveal>
-          <p className={styles.eyebrow}>Who it’s for</p>
-          <h2 id="audience-title" className={styles.h2}>A Home for Different Kinds of Educators.</h2>
-        </div>
-        <div className={styles.featureGrid} data-reveal-group>
-          {audiences.slice(0, 4).map((item) => (
-            <article key={item.title} className={styles.feature}>
-              <h3 className={styles.featureTitle}>{item.title}</h3>
-              <p className={styles.stepText}>{item.text}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- Frequently asked questions ---------- */
 export function FAQSection() {
   return (
-    <section id="faq" className={`${styles.section} ${styles.sectionMuted}`} aria-labelledby="faq-title">
-      <div className={styles.container}>
-        <div className={`${styles.sectionHead} ${styles.center}`} data-reveal>
-          <p className={styles.eyebrow}>FAQs</p>
-          <h2 id="faq-title" className={styles.h2}>Questions About ZIQX Skills?</h2>
-        </div>
-        <div className={styles.faqList} data-reveal>
-          {faqItems.map((item) => (
-            <details className={styles.faqItem} key={item.q}>
-              <summary className={styles.faqTrigger}>{item.q}</summary>
-              <p className={styles.faqPanel}>{item.a}</p>
-            </details>
+    <section id="faq" className={styles.section} aria-labelledby="faq-title">
+      <div className={`${styles.container} ${styles.faqLayout}`}>
+        <header className={styles.sectionHead}><p className={styles.kicker}>FAQ</p><h2 id="faq-title">Before you get started.</h2></header>
+        <div className={styles.questions}>
+          {faqItems.map(({ q, a }) => (
+            <details key={q}><summary>{q}<ChevronDown size={17} aria-hidden="true" className={styles.chevron} /></summary><p>{a}</p></details>
           ))}
-        </div>
-        <p className={styles.faqNote} role="note" data-reveal>{videoPrivacyNote}</p>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- 10 Final CTA ---------- */
-export function FinalCta() {
-  return (
-    <section className={`${styles.section} ${styles.sectionLavender} ${styles.finalCta}`} aria-labelledby="final-title">
-      <div className={styles.container}>
-        <h2 id="final-title" className={styles.h2}>Your Teaching Journey. A Better Platform.</h2>
-        <p className={styles.lead}>Bring your videos, courses and learners together with ZIQX Skills.</p>
-        <div className={styles.btnRow}>
-          <a href={siteConfig.signupHref} className={`${styles.btn} ${styles.btnPrimary}`}>
-            Start Creating Courses <ArrowRight size={18} strokeWidth={1.75} aria-hidden="true" />
-          </a>
+          <details><summary>Are unlisted videos private?<ChevronDown size={17} aria-hidden="true" className={styles.chevron} /></summary><p>{videoPrivacyNote}</p></details>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- 11 Footer ---------- */
+const copyrightYear = new Date().getUTCFullYear();
+
 export function SiteFooter() {
-  const year = new Date().getFullYear();
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
-        <div className={styles.footerGrid}>
-          <div>
-            <Link href="/" className={styles.brand}>
-              <span className={styles.brandMark} aria-hidden="true">Z</span>
-              ZIQX Skills
-            </Link>
-            <p className={styles.footerDesc}>
-              Turn your existing YouTube Unlisted videos into structured online courses, set your prices and reach students through one platform.
-            </p>
+        <div className={styles.footerInner}>
+          <div className={styles.footerAbout}>
+            <a href="#platform" className={styles.brand}><img src="/favicon.svg" alt="" width="38" height="38" /> ZIQX Skills</a>
+            <p>Give your knowledge a place to grow. Create courses from your videos, connect with learners, and build your teaching business.</p>
+            <a href={siteConfig.signupHref} className={styles.footerCta}>
+              {siteConfig.signupHref === '#contact' ? 'Request a demo' : 'Create a course'}
+              <ArrowRight size={16} aria-hidden="true" />
+            </a>
           </div>
-          <nav aria-label="Platform">
-            <h2 className={styles.footerHeading}>Platform</h2>
-            <ul className={styles.footerList}>
-              <li><a className={styles.footerLink} href="#platform">Platform</a></li>
-              <li><a className={styles.footerLink} href="#features">Features</a></li>
-              <li><a className={styles.footerLink} href="#how-it-works">How it works</a></li>
-              <li><a className={styles.footerLink} href="#for-teachers">For teachers</a></li>
+          <nav className={styles.footerColumn} aria-labelledby="footer-product">
+            <h2 id="footer-product">Product</h2>
+            <ul>
+              <li><a href="#features">Platform features</a></li>
+              <li><a href="#for-teachers">Course builder</a></li>
+              <li><a href="#product">Learner portal</a></li>
+              <li><a href="#monetization">Free &amp; paid courses</a></li>
             </ul>
           </nav>
-          <div>
-            <h2 className={styles.footerHeading}>Contact</h2>
-            <ul className={styles.footerList}>
-              <li><a className={styles.footerLink} href="#contact">Request a demo</a></li>
-              {siteConfig.contactEmail ? (
-                <li><a className={styles.footerLink} href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a></li>
-              ) : (
-                <li><span className={styles.footerLink}>Official email: to be configured</span></li>
-              )}
-            </ul>
-          </div>
-          <nav aria-label="Explore">
-            <h2 className={styles.footerHeading}>Explore</h2>
-            <ul className={styles.footerList}>
-              <li><a className={styles.footerLink} href="#product">Product overview</a></li>
-              <li><a className={styles.footerLink} href="#monetization">Free and paid courses</a></li>
-              <li><a className={styles.footerLink} href="#faq">FAQs</a></li>
+          <nav className={styles.footerColumn} aria-labelledby="footer-explore">
+            <h2 id="footer-explore">Explore</h2>
+            <ul>
+              <li><a href="#how-it-works">How it works</a></li>
+              <li><a href="#audience">Who we’re built for</a></li>
+              {testimonials.length > 0 && <li><a href="#testimonials">Teacher stories</a></li>}
+              <li><a href="#faq">Common questions</a></li>
             </ul>
           </nav>
+          <div className={styles.footerColumn}>
+            <h2>Let’s connect</h2>
+            <p>Planning your first course or bringing your academy online? Talk to our team.</p>
+            <a className={styles.footerContact} href="#contact">Get in touch <ArrowRight size={15} aria-hidden="true" /></a>
+            {siteConfig.contactEmail && <a className={styles.footerEmail} href={`mailto:${siteConfig.contactEmail}`}>{siteConfig.contactEmail}</a>}
+          </div>
         </div>
-        <div className={styles.footerBottom}>© {year} ZIQX Skills. All rights reserved.</div>
+        <div className={styles.footerBottom}>
+          <span>© {copyrightYear} ZIQX Skills. All rights reserved.</span>
+          <a href="#platform">Back to top <ArrowDown size={14} aria-hidden="true" /></a>
+        </div>
       </div>
     </footer>
   );
