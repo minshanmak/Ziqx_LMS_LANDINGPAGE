@@ -1,0 +1,118 @@
+﻿.screen {
+  container-type: inline-size;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid #d6d6de;
+  border-radius: 15px;
+  background: white;
+  color: var(--text-primary);
+  font-family: Manrope, system-ui, sans-serif;
+  line-height: 1.4;
+  box-shadow: 0 10px 26px -14px rgb(26 26 51 / 27%);
+}
+
+.screen svg { flex: none; stroke-width: 1.75; }
+.screen small { display: block; color: var(--text-secondary); font-size: 10px; font-weight: 500; }
+.screen b, .screen strong { font-weight: 800; }
+.toolbar, .wordmark, .heading, .subhead, .blackAction, .quietAction, .courseName,
+.published, .live, .tabs, .moduleRow, .lessons > div, .resume { display: flex; align-items: center; }
+.toolbar { gap: 12px; min-height: 42px; padding: 7px 16px; border-bottom: 1px solid var(--border-divider); }
+.wordmark { gap: 6px; font-size: 13px; font-weight: 800; letter-spacing: -.04em; white-space: nowrap; }
+.wordmark i, .avatar, .courseName i, .liveIcon, .moduleRow > span, .resumeIcon, .resumeArrow {
+  flex: none; display: grid; place-items: center;
+}
+.wordmark i { width: 23px; height: 23px; border-radius: 7px; background: var(--text-primary); color: white; }
+.screenTitle { padding-left: 12px; border-left: 1px solid var(--border-default); color: var(--text-secondary); font-size: 11px; }
+.previewLabel { margin-left: auto; color: var(--text-muted); font-size: 10px; }
+.avatar { width: 24px; height: 24px; border-radius: 50%; background: var(--surface-sky); font-size: 9px; font-weight: 800; }
+.canvas { padding: clamp(14px, 3.8cqw, 24px); }
+.heading, .subhead { justify-content: space-between; gap: 8px; }
+.heading > div > strong { display: block; font-size: clamp(17px, 4cqw, 25px); letter-spacing: -.05em; line-height: 1.25; }
+.heading small { margin-top: 3px; }
+.blackAction, .quietAction { flex: none; gap: 4px; border-radius: 6px; padding: 6px 8px; font-size: 10px; font-weight: 700; }
+.blackAction { background: var(--text-primary); color: white; }
+.quietAction { border: 1px solid var(--border-default); }
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  margin-top: 16px;
+  padding: 13px;
+  border-radius: 10px;
+  background: var(--bg-muted);
+}
+.metrics > div { display: grid; align-content: start; justify-items: start; gap: 2px; }
+.metrics strong { font-size: clamp(16px, 4cqw, 23px); letter-spacing: -.055em; }
+.metrics small { font-size: 9px; }
+.subhead { margin: 16px 0 7px; }
+.subhead > strong { font-size: 14px; letter-spacing: -.025em; }
+.subhead > svg { color: var(--text-muted); }
+.tableHead, .courseRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(65px, .36fr) minmax(42px, .19fr);
+  align-items: center;
+  gap: 6px;
+}
+.tableHead { padding-bottom: 5px; color: var(--text-secondary); font-size: 9px; }
+.courseRow { min-height: 41px; border-top: 1px solid var(--border-divider); }
+.courseName { min-width: 0; gap: 8px; font-size: 11px; }
+.courseName i { width: 27px; height: 27px; border-radius: 8px; }
+.courseName small { font-size: 9px; }
+.sky { background: var(--surface-sky); }
+.lavender { background: var(--surface-lavender); }
+.lime { background: var(--surface-lime); }
+.published {
+  justify-self: start; width: max-content; gap: 3px; padding: 3px 6px;
+  border-radius: 5px; background: #e1f3e3; color: #216434; font-size: 9px; font-weight: 700;
+}
+.number { font-size: 11px; font-variant-numeric: tabular-nums; }
+.live { gap: 9px; margin-top: 10px; padding: 10px 12px; background: var(--surface-sky); border-radius: 10px; }
+.liveIcon { width: 28px; height: 28px; }
+.live b { display: block; font-size: 12px; }
+.live small { font-size: 9px; }
+.liveTime { margin-left: auto; font-size: 10px; font-weight: 600; }
+.tabs { gap: 16px; margin-top: 15px; border-bottom: 1px solid var(--border-divider); font-size: 10px; color: var(--text-secondary); }
+.tabs > * { padding-bottom: 8px; }
+.tabs b { border-bottom: 2px solid var(--text-primary); color: var(--text-primary); }
+.moduleRow { gap: 7px; min-height: 40px; padding: 7px 2px; border-top: 1px solid var(--border-divider); }
+.moduleRow > span { width: 23px; height: 23px; border-radius: 7px; background: var(--surface-lavender); font-size: 11px; font-weight: 800; }
+.moduleRow b, .lessons b { font-size: 11px; }
+.moduleRow small, .lessons small { margin-left: auto; white-space: nowrap; }
+.lessons { padding: 0 0 7px 20px; }
+.lessons > div { gap: 6px; min-height: 31px; color: var(--text-secondary); }
+.lessons svg:first-child { color: var(--text-muted); }
+.resume { gap: 12px; margin-top: 14px; padding: clamp(10px, 3cqw, 17px); border-radius: 12px; background: var(--surface-lavender); }
+.resumeIcon { width: 44px; height: 44px; border-radius: 10px; background: white; }
+.resume strong { display: block; font-size: 16px; letter-spacing: -.035em; }
+.resume small { text-transform: uppercase; font-size: 8px; font-weight: 800; letter-spacing: .09em; }
+.resume > div > span { font-size: 10px; }
+.resumeArrow { margin-left: auto; width: 27px; height: 27px; border-radius: 8px; background: var(--text-primary); color: white; }
+.enrolled { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.miniCourse { overflow: hidden; border: 1px solid var(--border-divider); border-radius: 10px; }
+.miniCourse > div:first-child { display: grid; place-items: center; min-height: clamp(38px, 9cqw, 59px); }
+.miniDetails { padding: 9px; }
+.miniDetails b { display: block; font-size: 11px; }
+.miniDetails small { font-size: 9px; }
+.track { display: block; height: 4px; margin: 8px 0 4px; overflow: hidden; border-radius: 4px; background: var(--bg-muted); }
+.track i { display: block; height: 100%; background: var(--text-primary); }
+
+@container (max-width: 370px) {
+  .toolbar { padding-inline: 10px; gap: 7px; }
+  .screenTitle { padding-left: 7px; }
+  .canvas { padding: 12px; }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 10px; }
+  .metrics > div { grid-template-columns: 16px 1fr; align-items: center; column-gap: 5px; }
+  .metrics small { grid-column: 1 / -1; }
+  .tableHead, .courseRow { grid-template-columns: minmax(0, 1fr) auto; }
+  .tableHead span:nth-child(2), .courseRow .published { display: none; }
+  .number { text-align: right; }
+  .blackAction { display: none; }
+  .tabs { gap: 12px; }
+  .lessons { padding-left: 8px; }
+  .resume { gap: 7px; }
+  .resumeIcon { width: 30px; height: 35px; }
+  .resumeIcon svg { width: 18px; }
+  .enrolled { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .miniCourse:last-child { display: none; }
+}

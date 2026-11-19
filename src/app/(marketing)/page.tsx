@@ -1,7 +1,6 @@
-/*  */import type { Metadata } from 'next';
+import type { Metadata } from 'next';
 import { MarketingNav } from '@/components/marketing/Nav';
-import { ScrollObserver } from '@/components/marketing/ScrollObserver';
-import { Hero, ProblemSolution, HowItWorks, Features, ProductShowcase, Monetization, Testimonials, AudienceSection, FAQSection, SiteFooter } from '@/components/marketing/sections';
+import { Hero, HowItWorks, Features, ProductShowcase, Testimonials, AudienceSection, FAQSection, SiteFooter } from '@/components/marketing/sections';
 import { ContactSection } from '@/components/marketing/ContactSection';
 import { siteConfig } from '@/marketing/config';
 import styles from '@/components/marketing/marketing.module.css';
@@ -51,15 +50,12 @@ export default function MarketingHome() {
       </a>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <MarketingNav />
-      <ScrollObserver />
       <main id="main" className={styles.main}>
         <Hero />
-        <ProblemSolution />
+        <AudienceSection />
         <Features />
         <HowItWorks />
         <ProductShowcase />
-        <Monetization />
-        <AudienceSection />
         <Testimonials />
         <FAQSection />
         <ContactSection />
